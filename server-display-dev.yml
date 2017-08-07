@@ -1,0 +1,65 @@
+spring:
+  cloud:
+    config:
+      allowOverride: true
+      failFast: true
+      overrideNone: false
+      overrideSystemProperties: true
+
+eureka:
+  instance:
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    lease-renewal-interval-in-seconds: 5 #心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-expiration-duration-in-seconds: 10 #发呆时间，即服务续约到期时间（缺省为90s）
+  client:
+    serviceUrl:
+      defaultZone: http://10.0.52.180:8081/eureka/ #去哪里注册，eureka服务地址
+    registry-fetch-interval-seconds: 5      
+
+    
+### uat url 地址
+uat:
+  activiti:
+    explorer:
+      url: http://10.0.52.181:8008/activiti-explorer
+  netAddr: 
+    gitlab: 
+      url: http://10.0.52.190:8003/ 
+    openshift:
+      url: https://10.0.52.191:8043/ 
+    admin:
+      url: http://10.0.52.180:8090
+    zipkin:
+      url: http://10.0.52.183:8031/
+    swaggerUI: 
+      url: http://10.0.52.183:8060/swagger-ui.html
+    eureka:
+      url: http://10.0.52.180:8081/
+      
+      
+### prod url 地址
+prod:
+  netAddr:
+    sms:
+      url: http://10.0.6.160:8012/sms-server/smsTemplate #f5 通过网关访问eureka
+    eureka:
+      url: http://10.0.6.160:8012/eureka-server
+    gitlab:
+      url: http://10.0.52.190:8003/
+    openshift:
+      url: https://10.0.6.150:8043/
+    admin:
+      url: http://10.0.6.151:8090
+    swaggerUI:
+      url: http://10.0.6.152:8060/swagger-ui.html
+  activiti:
+    explorer: 
+      url:  
+        qem: http://10.0.6.153:8018/activiti-explorer/ ## 质量工程
+        psa: http://10.0.6.152:8018/activiti-explorer/ ## 计划系统
+        
+        
+management:
+  security:
+    enabled: false
